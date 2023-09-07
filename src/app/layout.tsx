@@ -1,10 +1,8 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Lexend_Deca } from 'next/font/google'
-import { Big_Shoulders_Display } from 'next/font/google'
 
 const lexend = Lexend_Deca({ weight: '400', subsets: ['latin'] })
-const bigshoulder = Big_Shoulders_Display({ weight: '700', subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Create Next App',

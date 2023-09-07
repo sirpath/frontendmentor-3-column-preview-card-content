@@ -1,59 +1,49 @@
 import { Car } from '@/app/page'
+import { Big_Shoulders_Display } from 'next/font/google'
+
+const bigshoulder = Big_Shoulders_Display({
+  weight: '700',
+  subsets: ['latin'],
+})
 
 type props = {
   cars: Array<Car>
 }
 
 const Cardcar = (props: props) => {
-  return (
-    <div className="max-w-sm">
-      <div className="rounded-t-3xl bg-orangecard">
-        <div className="p-7">
+  const { cars } = props
+
+  const carslist = cars.map(
+    ({ category, describe, colorbg, iconPath, iconAlt, fontBtn }) => (
+      <div
+        key={describe}
+        className={`${colorbg} first:rounded-t-xl last:rounded-none last:rounded-b-xl md:rounded-tr-none md:first:rounded-l-xl md:first:rounded-tr-none md:last:rounded-none md:last:rounded-r-xl`}
+      >
+        <div className="pl-8 pt-10">
           <picture>
-            <img alt="caricon" src="./images/icon-sedans.svg" />
+            <img alt={iconAlt} src={iconPath} />
           </picture>
         </div>
-        <h1 className="py-5 pl-7 text-3xl font-bold text-primary">SEDANS</h1>
-        <p className="px-7 text-primary">
-          Choose a sedan for its affordability and excellent fuel economy. Ideal
-          for cruising in the city or on your next road trip.
-        </p>
-        <div className="p-7 ">
-          <button className="rounded-3xl bg-bgheadbtn p-3 px-7 text-orangecard">
+        <h1
+          className={`${bigshoulder.className} py-8 pl-8 text-3xl font-bold text-bgheadbtn`}
+        >
+          {category}
+        </h1>
+        <p className="px-8 text-primary md:text-base">{describe}</p>
+        <div className="p-8 md:pt-16">
+          <button
+            className={`${fontBtn} rounded-3xl border-2 border-solid bg-bgheadbtn p-3 px-8 hover:active:bg-transparent hover:active:text-primary`}
+          >
             Learn More
           </button>
         </div>
       </div>
+    ),
+  )
 
-      <div className="bg-cyancard">
-        <div className="p-7">img</div>
-        <h2 className="py-5 pl-7 text-3xl font-semibold text-primary">SUVS</h2>
-        <p className="px-7 text-primary">
-          Take an SUV for its spacious interior, power, and versatility. Perfect
-          for your next family vacation and off-road adventures.
-        </p>
-        <div className="p-7">
-          <button className="rounded-3xl bg-bgheadbtn p-3 px-7 text-cyancard">
-            Learn More
-          </button>
-        </div>
-      </div>
-
-      <div className="rounded-b-3xl bg-darkcyancard">
-        <div className="p-7">img</div>
-        <h3 className="py-5 pl-7 text-3xl font-semibold text-primary">
-          Luxury
-        </h3>
-        <p className="px-7 text-primary">
-          Cruise in the best car brands without the bloated prices. Enjoy the
-          enhanced comfort of a luxury rental and arrive in style.
-        </p>
-        <div className="p-7">
-          <button className="rounded-3xl bg-bgheadbtn p-3 px-7 text-darkcyancard">
-            Learn More
-          </button>
-        </div>
-      </div>
+  return (
+    <div className="flex max-w-sm flex-col p-8 md:max-w-4xl md:flex-row ">
+      {carslist}
     </div>
   )
 }
